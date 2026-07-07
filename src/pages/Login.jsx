@@ -73,9 +73,11 @@ export default function Login() {
         }
     }, [error, toast, searchParams]);
 
-    // ✨ အမှန်ပြင်ဆင်ထားသော GitHub Login Handler
+    // ✨ အလိုအလျောက် Backend URL ကို တွက်ချက်ပြီး မောင်းနှင်ပေးသော GitHub Handler
     const handleGithubLogin = () => {
-        window.location.href = '/auth/github';
+        const backendURL = subdomainAPI.defaults.baseURL || '';
+        const cleanBackendURL = backendURL.endsWith('/') ? backendURL.slice(0, -1) : backendURL;
+        window.location.href = `${cleanBackendURL}/auth/github`;
     };
 
     const handleEmailLogin = async (e) => {
@@ -172,7 +174,7 @@ export default function Login() {
                                     onClick={() => setErrorBanner(null)}
                                     aria-label="Dismiss error"
                                     className="text-red-900 hover:text-red-700 font-bold text-xl leading-none"
-                                >×</button>
+                                ></button>
                             </div>
                         </div>
                     )}
@@ -314,6 +316,5 @@ export default function Login() {
             </div>
         </>
     );
-     }
-
+                }
 
