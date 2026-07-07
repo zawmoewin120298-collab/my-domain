@@ -73,7 +73,10 @@ export default function Login() {
         }
     }, [error, toast, searchParams]);
 
-    const handleGithubLogin = () => login("github");
+    // ✨ အမှန်ပြင်ဆင်ထားသော GitHub Login Handler
+    const handleGithubLogin = () => {
+        window.location.href = '/auth/github';
+    };
 
     const handleEmailLogin = async (e) => {
         e.preventDefault();
@@ -95,7 +98,6 @@ export default function Login() {
                 captchaToken
             });
 
-            // Check if 2FA is required
             if (res.requires2FA) {
                 toast({
                     title: "2FA Required",
@@ -106,7 +108,6 @@ export default function Login() {
             }
 
             if (res.success) {
-                // Force full page reload to refresh auth context
                 window.location.href = '/dashboard';
             }
         } catch (err) {
@@ -155,7 +156,7 @@ export default function Login() {
                         </div>
                         <Link to="/" className="flex items-center gap-2 shrink-0">
                             <img src="/stackryze_logo_black.png" alt="Stackryze Logo" className="h-8 w-auto dark:hidden" />
-                        <img src="/stackryze_logo_white.png" alt="Stackryze Logo" className="h-8 w-auto hidden dark:block" />
+                            <img src="/stackryze_logo_white.png" alt="Stackryze Logo" className="h-8 w-auto hidden dark:block" />
                         </Link>
                     </div>
 
@@ -313,4 +314,6 @@ export default function Login() {
             </div>
         </>
     );
-}
+     }
+
+
